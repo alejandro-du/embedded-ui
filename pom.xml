@@ -74,6 +74,11 @@
 			<version>${vaadin.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.vaadin</groupId>
+			<artifactId>elements</artifactId>
+			<version>0.1.5</version>
+		</dependency>
 
 		<!-- This can be replaced with TestNG or some other test framework supported by the surefire plugin -->
 		<dependency>
@@ -81,6 +86,30 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.jetty</groupId>
+			<artifactId>jetty-vaadin</artifactId>
+			<version>1.1</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client-compiled</artifactId>
+            <version>7.7.5</version>
+			<scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-themes</artifactId>
+			<version>7.7.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+			<version>2.5</version>
+            <scope>test</scope>
 		</dependency>
 	</dependencies>
 
