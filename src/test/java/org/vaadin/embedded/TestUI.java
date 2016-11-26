@@ -1,6 +1,5 @@
 package org.vaadin.embedded;
 
-import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.SessionInitListener;
 import com.vaadin.server.VaadinRequest;
@@ -18,7 +17,6 @@ import javax.servlet.ServletException;
  * @author Alejandro Duarte.
  */
 @Theme(ValoTheme.THEME_NAME)
-@JavaScript("vaadin://bower_components/webcomponentsjs/webcomponents.js")
 public class TestUI extends UI {
 
     public static void main(String[] args) throws Exception {

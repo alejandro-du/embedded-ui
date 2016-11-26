@@ -1,17 +1,30 @@
 package org.vaadin.embedded;
 
-import org.vaadin.elements.AbstractElementComponent;
-import org.vaadin.elements.ElementIntegration;
-import org.vaadin.elements.Root;
+import com.vaadin.annotations.JavaScript;
+import com.vaadin.ui.AbstractJavaScriptComponent;
 
 /**
  * @author Alejandro Duarte.
  */
-public class VaadinUIComponent extends AbstractElementComponent {
+@JavaScript("vaadin-ui-component.js")
+public class VaadinUIComponent extends AbstractJavaScriptComponent {
+
+    private String url;
+    private String theme;
+    private String version;
+    private String widgetset;
 
     public VaadinUIComponent(String url, String theme, String version, String widgetset) {
-        Root root = ElementIntegration.getRoot(this);
-        root.appendChild(VaadinUIElement.create(url, "ui-" + hashCode(), theme, version, widgetset));
+        this.url = url;
+        this.theme = theme;
+        this.version = version;
+        this.widgetset = widgetset;
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+        callFunction("init", url, theme, version, widgetset);
     }
 
 }
