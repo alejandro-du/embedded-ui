@@ -4,7 +4,6 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.server.SessionInitListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.Version;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -33,14 +32,16 @@ public class TestUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        VaadinUIComponent ui1 = new VaadinUIComponent("http://localhost:9001", "valo", Version.getFullVersion(), VaadinServlet.DEFAULT_WIDGETSET);
-        VaadinUIComponent ui2 = new VaadinUIComponent("http://localhost:9002", "valo", Version.getFullVersion(), VaadinServlet.DEFAULT_WIDGETSET);
+        VaadinUIComponent ui1 = new VaadinUIComponent("http://localhost:9001");
+        ui1.setSizeFull();
+        VaadinUIComponent ui2 = new VaadinUIComponent("http://localhost:9002");
 
-        Button button1 = new Button("Local 1", e -> e.getButton().setCaption("It works!"));
-        Button button2 = new Button("Local 2", e -> e.getButton().setCaption("It works!"));
-        VerticalLayout mainLayout = new VerticalLayout(button1, ui1, ui2, button2);
+        Button button1 = new Button("Local", e -> e.getButton().setCaption("It works!"));
+        VerticalLayout mainLayout = new VerticalLayout(button1, ui1, ui2);
         mainLayout.setMargin(true);
         mainLayout.setSpacing(true);
+        mainLayout.setSizeFull();
+        mainLayout.setExpandRatio(ui1, 1);
         setContent(mainLayout);
     }
 
