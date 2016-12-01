@@ -5,6 +5,9 @@ import com.vaadin.server.BootstrapListener;
 import com.vaadin.server.BootstrapPageResponse;
 
 /**
+ * A Vaadin {@link BootstrapListener} that configures a <i>proxy</i> <code>XMLHttpRequest.send</code> function to activate
+ * cross-site Access-Control requests (CORS). You can use this directly or add a {@link CorsSessionListener} instead.
+ *
  * @author Alejandro Duarte.
  */
 public class CorsBootstrapListener implements BootstrapListener {

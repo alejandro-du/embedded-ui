@@ -4,10 +4,11 @@ window.org_vaadin_embedded_VaadinUIComponent = function() {
         httpGet(url, function(responseText) {
             var embedded = document.createElement("html");
             embedded.innerHTML = replaceStrings(responseText, url);
+            // TODO: add head elements
             var body = embedded.getElementsByTagName("body")[0];
             element.innerHTML = body.innerHTML;
             runScripts(element);
-            // TODO: add head elements
+            window.addHook()
         });
     }
 }
@@ -93,5 +94,17 @@ window.runScripts = function(element) {
             script.parentNode.removeChild(script);
         }
         evalScript(scripts[i]);
+    }
+}
+
+window.addHook = function() {
+    var hook = function() {
+        window.vaadin.forceLayout();
+    }
+
+    if (!window.vaadin.postRequestHooks) {
+        window.vaadin.postRequestHooks = [hook];
+    } else {
+        window.vaadin.postRequestHooks.push(hook);
     }
 }

@@ -1,16 +1,13 @@
 package org.vaadin.embedded;
 
 import com.vaadin.annotations.Theme;
-import com.vaadin.server.SessionInitListener;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.vaadin.jetty.VaadinJettyServer;
-
-import javax.servlet.ServletException;
 
 /**
  * @author Alejandro Duarte.
@@ -19,14 +16,9 @@ import javax.servlet.ServletException;
 public class TestUI extends UI {
 
     public static void main(String[] args) throws Exception {
-        VaadinJettyServer server = new VaadinJettyServer(8080, TestUI.class, new VaadinServlet() {
-            @Override
-            protected void servletInitialized() throws ServletException {
-                super.servletInitialized();
-                getService().addSessionInitListener(
-                        (SessionInitListener) event -> event.getSession().addBootstrapListener(new CorsBootstrapListener()));
-            }
-        });
+        VaadinJettyServer server = new VaadinJettyServer(8080, TestUI.class);
+        WebAppContext handler = (WebAppContext) server.getHandler();
+        handler.addEventListener(new CorsSessionListener());
         server.start();
     }
 
@@ -36,7 +28,12 @@ public class TestUI extends UI {
         ui1.setSizeFull();
         VaadinUIComponent ui2 = new VaadinUIComponent("http://localhost:9002");
 
-        Button button1 = new Button("Local", e -> e.getButton().setCaption("It works!"));
+        Button button1 = new Button("Local", new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent e) {
+                e.getButton().setCaption("It works!");
+            }
+        });
         VerticalLayout mainLayout = new VerticalLayout(button1, ui1, ui2);
         mainLayout.setMargin(true);
         mainLayout.setSpacing(true);

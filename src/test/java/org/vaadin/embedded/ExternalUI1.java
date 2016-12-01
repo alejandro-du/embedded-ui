@@ -28,7 +28,14 @@ public class ExternalUI1 extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        setContent(new Button("External UI 1", e -> e.getButton().setCaption("It works!")));
+        Button button = new Button("External UI 1", new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent e) {
+                e.getButton().setCaption("It works!");
+            }
+        });
+        button.setSizeFull();
+        setContent(button);
     }
 
 }
