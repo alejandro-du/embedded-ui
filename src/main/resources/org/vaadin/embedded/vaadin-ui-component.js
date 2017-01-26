@@ -1,9 +1,9 @@
 window.org_vaadin_embedded_VaadinUIComponent = function() {
     var element = this.getElement();
-    this.init = function(url) {
+    this.init = function(url, appId) {
         httpGet(url, function(responseText) {
             var embedded = document.createElement("html");
-            embedded.innerHTML = replaceStrings(responseText, url);
+            embedded.innerHTML = replaceStrings(responseText, url, appId);
             // TODO: add head elements
             var body = embedded.getElementsByTagName("body")[0];
             element.innerHTML = body.innerHTML;
@@ -23,15 +23,11 @@ window.httpGet = function(url, callback) {
     request.send(null);
 }
 
-window.replaceStrings = function(html, url) {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    var n = (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-
+window.replaceStrings = function(html, url, appId) {
     var regEx = /(vaadin\.initApplication\(\")(.*)(\".*)/g;
     var match = regEx.exec(html);
     var o = match[2];
+    var n = appId;
 
     while(html.includes(o)) {
         html = html.replace(o, n);

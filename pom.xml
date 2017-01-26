@@ -5,7 +5,7 @@
     <groupId>org.vaadin.embedded</groupId>
     <artifactId>embedded-ui</artifactId>
     <packaging>jar</packaging>
-    <version>1.1</version>
+    <version>1.2</version>
     <name>Embedded UI</name>
 
     <prerequisites>
