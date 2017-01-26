@@ -33,8 +33,7 @@ public class VaadinUIComponent extends AbstractJavaScriptComponent {
     @Override
     public void detach() {
         super.detach();
-        // TODO: The following is not currently available in the framework, but necessary to fix #1:
-        // com.vaadin.ui.JavaScript.eval("window.vaadin.removeApp('" + appId + "');");
+        com.vaadin.ui.JavaScript.eval("window.vaadin.removeApp('" + appId + "');");
     }
 
     public String getUrl() {
