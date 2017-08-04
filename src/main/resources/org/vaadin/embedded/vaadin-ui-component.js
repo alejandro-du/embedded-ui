@@ -36,13 +36,13 @@ window.replaceStrings = function(html, url, appId) {
     regEx = /(\"vaadinDir\")(.*\")(.*)(\".*)/g;
     match = regEx.exec(html);
     o = match[1] + match[2] + match[3] + match[4];
-    n = match[1] + match[2] + url + match[4];
+    n = match[1] + match[2] + url + "/" + match[3] + match[4];
     html = html.replace(o, n);
 
     regEx = /(\"serviceUrl\")(.*\")(.*)(\".*)/g;
     match = regEx.exec(html);
     o = match[1] + match[2] + match[3] + match[4];
-    n = match[1] + match[2] + url + match[4];
+    n = match[1] + match[2] + (match[3].startsWith("/") ? url + match[3] : url) + match[4];
     html = html.replace(o, n);
 
     regEx = /(\"standalone\":)( *)(true)(.*)/g;
